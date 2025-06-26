@@ -1,7 +1,9 @@
-name: Deploy to GitHub Pages
+name: Build and Deploy
 
 on:
   push:
+    branches: [ main ]
+  pull_request:
     branches: [ main ]
 
 jobs:
@@ -30,17 +32,23 @@ jobs:
     - name: Install dependencies
       run: npm ci
       
+    - name: Run ESLint
+      run: npm run lint
+      
     - name: Build application
       run: npm run build
       
     - name: Setup Pages
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       uses: actions/configure-pages@v3
       
     - name: Upload artifact
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       uses: actions/upload-pages-artifact@v2
       with:
         path: ./dist
         
     - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       id: deployment
       uses: actions/deploy-pages@v2 
