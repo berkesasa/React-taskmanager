@@ -54,7 +54,7 @@ const KanbanColumn = ({ column, dragHandleProps, isDragging }) => {
 
   return (
     <>
-      <div className={`w-80 minimal-card ${
+      <div className={`w-72 minimal-card ${
         isDragging ? 'opacity-75 rotate-2 scale-105' : ''
       }`}>
         {/* Column Header */}

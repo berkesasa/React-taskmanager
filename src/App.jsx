@@ -70,7 +70,7 @@ function App() {
         
         {selectedTasks.length > 0 && <BulkActionBar />}
         
-        <main className="max-w-7xl mx-auto px-4 py-6">
+        <main className="max-w-7xl mx-auto px-4 py-6 overflow-x-scroll">
           <div className="flex gap-6">
             <FilterPanel />
             <div className="flex-1">
