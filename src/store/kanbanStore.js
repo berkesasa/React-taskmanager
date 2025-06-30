@@ -19,7 +19,6 @@ const initialTasks = [
     tags: ['planning', 'project'],
     columnId: 'todo',
     createdAt: new Date(),
-    attachments: [],
     subtasks: [
       { id: '1-1', text: 'Requirements analysis', completed: false },
       { id: '1-2', text: 'Create timeline', completed: true }
@@ -34,7 +33,6 @@ const initialTasks = [
     tags: ['design', 'frontend'],
     columnId: 'in-progress',
     createdAt: new Date(),
-    attachments: [],
     subtasks: []
   }
 ]
@@ -133,7 +131,6 @@ export const useKanbanStore = create((set, get) => ({
       tags: taskData.tags || [],
       columnId: taskData.columnId,
       createdAt: new Date(),
-      attachments: [],
       subtasks: []
     }
 

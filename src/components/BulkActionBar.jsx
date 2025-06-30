@@ -52,7 +52,7 @@ const BulkActionBar = () => {
 
   return (
     <div className="bg-white border-b border-neutral-200 sticky top-16 z-30">
-      <div className="max-w-7xl mx-auto px-4 py-3">
+      <div className="w-full px-3 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-3">
         <div className="flex items-center justify-between">
           {/* Selection Info */}
           <div className="flex items-center space-x-4">

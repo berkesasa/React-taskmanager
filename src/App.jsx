@@ -70,10 +70,10 @@ function App() {
         
         {selectedTasks.length > 0 && <BulkActionBar />}
         
-        <main className="max-w-7xl mx-auto px-4 py-6 overflow-x-scroll">
+        <main className="w-full px-3 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6 overflow-x-hidden">
           <div className="flex gap-6">
             <FilterPanel />
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <DragDropContext onDragEnd={handleDragEnd}>
                 <KanbanBoard />
               </DragDropContext>

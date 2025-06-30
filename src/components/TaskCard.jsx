@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { 
   Calendar, 
-  Paperclip, 
   CheckSquare, 
   MoreHorizontal,
   Edit3,
@@ -214,14 +213,6 @@ const TaskCard = ({ task, index, isSelected }) => {
                   <div className={`flex items-center space-x-1 px-2 py-1 rounded ${dueDateStatus.color}`}>
                     <Calendar className="h-3 w-3" />
                     <span className="font-medium">{dueDateStatus.text}</span>
-                  </div>
-                )}
-
-                {/* Attachments */}
-                {task.attachments && task.attachments.length > 0 && (
-                  <div className="flex items-center space-x-1 text-neutral-500">
-                    <Paperclip className="h-3 w-3" />
-                    <span>{task.attachments.length}</span>
                   </div>
                 )}
               </div>

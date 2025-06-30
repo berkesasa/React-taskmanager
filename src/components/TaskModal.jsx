@@ -8,10 +8,7 @@ import {
   Plus, 
   Trash2, 
   CheckSquare,
-  Square,
-  Upload,
-  Paperclip,
-  Download
+  Square
 } from 'lucide-react'
 import DatePicker from 'react-datepicker'
 import { useKanbanStore } from '../store/kanbanStore'
@@ -38,7 +35,6 @@ const TaskModal = () => {
   const [tagInput, setTagInput] = useState('')
   const [subtasks, setSubtasks] = useState(editingTask?.subtasks || [])
   const [subtaskInput, setSubtaskInput] = useState('')
-  const [attachments, setAttachments] = useState(editingTask?.attachments || [])
 
   const {
     register,
@@ -68,7 +64,6 @@ const TaskModal = () => {
       setSelectedDate(editingTask.dueDate ? new Date(editingTask.dueDate) : null)
       setTags(editingTask.tags || [])
       setSubtasks(editingTask.subtasks || [])
-      setAttachments(editingTask.attachments || [])
     } else {
       reset({
         title: '',
@@ -79,7 +74,6 @@ const TaskModal = () => {
       setSelectedDate(null)
       setTags([])
       setSubtasks([])
-      setAttachments([])
     }
   }, [editingTask, defaultColumnId, columns, reset])
 
@@ -106,8 +100,7 @@ const TaskModal = () => {
         ...data,
         dueDate: selectedDate,
         tags,
-        subtasks,
-        attachments
+        subtasks
       }
 
       if (editingTask) {
@@ -180,30 +173,6 @@ const TaskModal = () => {
       e.preventDefault()
       handleAddSubtask()
     }
-  }
-
-  const handleFileUpload = (e) => {
-    const files = Array.from(e.target.files)
-    const newAttachments = files.map(file => ({
-      id: Date.now() + Math.random(),
-      name: file.name,
-      size: file.size,
-      type: file.type,
-      url: URL.createObjectURL(file)
-    }))
-    setAttachments([...attachments, ...newAttachments])
-  }
-
-  const handleRemoveAttachment = (attachmentId) => {
-    setAttachments(attachments.filter(att => att.id !== attachmentId))
-  }
-
-  const formatFileSize = (bytes) => {
-    if (bytes === 0) return '0 Bytes'
-    const k = 1024
-    const sizes = ['Bytes', 'KB', 'MB', 'GB']
-    const i = Math.floor(Math.log(bytes) / Math.log(k))
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
   }
 
   if (!isTaskModalOpen) return null
@@ -399,53 +368,6 @@ const TaskModal = () => {
                 <Plus className="h-4 w-4" />
               </button>
             </div>
-          </div>
-
-          {/* File Attachments */}
-          <div>
-            <label className="block text-sm font-medium text-neutral-900 mb-2">
-              <Paperclip className="h-4 w-4 inline mr-1" />
-              File Attachments
-            </label>
-            <div className="space-y-2 mb-3">
-              {attachments.map((attachment) => (
-                <div key={attachment.id} className="flex items-center justify-between p-3 bg-neutral-50 rounded-lg">
-                  <div className="flex items-center gap-3">
-                    <Paperclip className="h-4 w-4 text-neutral-400" />
-                    <div>
-                      <p className="text-sm font-medium text-neutral-900">{attachment.name}</p>
-                      <p className="text-xs text-neutral-500">{formatFileSize(attachment.size)}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <a
-                      href={attachment.url}
-                      download={attachment.name}
-                      className="text-blue-600 hover:text-blue-800"
-                    >
-                      <Download className="h-4 w-4" />
-                    </a>
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveAttachment(attachment.id)}
-                      className="text-red-500 hover:text-red-700"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <label className="flex items-center justify-center w-full p-4 border-2 border-dashed border-neutral-300 rounded-lg cursor-pointer hover:border-blue-400 transition-colors">
-              <Upload className="h-4 w-4 text-neutral-400 mr-2" />
-              <span className="text-sm text-neutral-600">Upload file</span>
-              <input
-                type="file"
-                multiple
-                onChange={handleFileUpload}
-                className="hidden"
-              />
-            </label>
           </div>
 
           {/* Form Actions */}

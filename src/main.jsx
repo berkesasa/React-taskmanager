@@ -6,19 +6,17 @@ import { Toaster } from 'react-hot-toast'
 import ErrorBoundary from './components/ErrorBoundary.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <ErrorBoundary>
-      <App />
-      <Toaster 
-        position="top-right"
-        toastOptions={{
-          duration: 3000,
-          style: {
-            background: '#363636',
-            color: '#fff',
-          },
-        }}
-      />
-    </ErrorBoundary>
-  </React.StrictMode>,
+  <ErrorBoundary>
+    <App />
+    <Toaster 
+      position="top-right"
+      toastOptions={{
+        duration: 3000,
+        style: {
+          background: '#363636',
+          color: '#fff',
+        },
+      }}
+    />
+  </ErrorBoundary>
 ) 
